@@ -1,0 +1,7 @@
+main/parsed-data/*
+main/videos/*
+main/config/*
+**/.idea/*
+
+
+main/pipelines/connectors.py
