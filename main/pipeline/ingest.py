@@ -9,7 +9,7 @@ from main.scripts.scenedetector import SceneDetect
 
 class SceneDetectIngest:
     """
-        Grab guids from for processed videos and append to tracker file.
+        Grab guids for processed videos and append to tracker file.
         A dummy tracker file is created with n/a as value when no videos have been processed for the station before.
     """
     def setTracker(self,station_):
