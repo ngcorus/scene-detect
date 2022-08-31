@@ -8,12 +8,14 @@ import configparser
 from main.scripts.scenedetector import SceneDetect
 
 class SceneDetectIngest:
-    # Grab guids from a file and append to tracker file
+    """
+        Grab guids from for processed videos and append to tracker file.
+        A dummy tracker file is created with n/a as value when no videos have been processed for the station before.
+    """
     def setTracker(self,station_):
         trackerfile = '../parsed-data/tracker.csv'
         if os.path.exists(trackerfile):
             os.remove(trackerfile)
-        # Tracker file grabs ids for processed videos. A dummy tracker file is created with n/a as an id when no videos were processed for the station before.
         try:
             print('Checking processed videos GUIDs...')
             get_station = pd.read_csv(f'../parsed-data/{station_}.csv')
@@ -26,8 +28,9 @@ class SceneDetectIngest:
             with open(trackerfile, 'a') as f:
                 f.write('n/a')
 
-
-    # Create list of tokens against which the current file is checked to identify if it has already been processed
+    """
+        Create list of tokens against which the current file is checked to identify if it has already been processed
+    """
     def tokens(self,station_):
         self.setTracker(station_)
         print('Initiating scene detection...')
@@ -62,7 +65,6 @@ class SceneDetectIngest:
                             aws_session_token = aws_session_token
         )
 
-        # get token list - run this function if the ingest was previously interrupted
         get_tokens = self.tokens(station)
         paginator = s3.get_paginator('list_objects')
 
